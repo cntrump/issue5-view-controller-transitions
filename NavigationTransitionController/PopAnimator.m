@@ -6,27 +6,32 @@
 //  Copyright (c) 2013 Chris Eidhof. All rights reserved.
 //
 
-#import "Animator.h"
+#import "PopAnimator.h"
 
-@implementation Animator
+@implementation PopAnimator
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return 1;
+    return 0.3;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     UIViewController* toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIViewController* fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    [[transitionContext containerView] addSubview:toViewController.view];
-    toViewController.view.alpha = 0;
-    
-    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-        fromViewController.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
-        toViewController.view.alpha = 1;
+
+    UIView *containerView = transitionContext.containerView;
+    [containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
+
+    CGFloat w = CGRectGetWidth(containerView.frame);
+    toViewController.view.transform = CGAffineTransformMakeTranslation(-0.5 * w, 0);
+
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+        fromViewController.view.transform = CGAffineTransformMakeTranslation(w, 0);
+        toViewController.view.transform = CGAffineTransformMakeTranslation(0, 0);
     } completion:^(BOOL finished) {
         fromViewController.view.transform = CGAffineTransformIdentity;
+        toViewController.view.transform = CGAffineTransformIdentity;
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         
     }];

@@ -7,13 +7,14 @@
 //
 
 #import "NavigationControllerDelegate.h"
-#import "Animator.h"
+#import "PopAnimator.h"
 
 @interface NavigationControllerDelegate ()
 
 @property (weak, nonatomic) IBOutlet UINavigationController *navigationController;
-@property (strong, nonatomic) Animator* animator;
+@property (strong, nonatomic) PopAnimator* animator;
 @property (strong, nonatomic) UIPercentDrivenInteractiveTransition* interactionController;
+@property (assign, nonatomic) BOOL interactive;
 
 @end
 
@@ -21,10 +22,12 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     UIPanGestureRecognizer* panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     [self.navigationController.view addGestureRecognizer:panRecognizer];
     
-    self.animator = [Animator new];
+    self.animator = [PopAnimator new];
 }
 
 - (void)pan:(UIPanGestureRecognizer*)recognizer
@@ -33,6 +36,7 @@
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         CGPoint location = [recognizer locationInView:view];
         if (location.x <  CGRectGetMidX(view.bounds) && self.navigationController.viewControllers.count > 1) { // left half
+            self.interactive = YES;
             self.interactionController = [UIPercentDrivenInteractiveTransition new];
             [self.navigationController popViewControllerAnimated:YES];
         }
@@ -52,6 +56,10 @@
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
 {
+    if (!self.interactive) {
+        return nil;
+    }
+    
     if (operation == UINavigationControllerOperationPop) {
         return self.animator;
     }

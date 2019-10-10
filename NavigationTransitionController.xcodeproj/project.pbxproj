@@ -22,7 +22,7 @@
 		83C1B6FD1805FB3100A9DD41 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83C1B6FB1805FB3100A9DD41 /* InfoPlist.strings */; };
 		83C1B6FF1805FB3100A9DD41 /* NavigationTransitionControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C1B6FE1805FB3100A9DD41 /* NavigationTransitionControllerTests.m */; };
 		83C1B70A1805FB5A00A9DD41 /* NavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C1B7091805FB5A00A9DD41 /* NavigationControllerDelegate.m */; };
-		83C1B70D1805FD8600A9DD41 /* Animator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C1B70C1805FD8600A9DD41 /* Animator.m */; };
+		83C1B70D1805FD8600A9DD41 /* PopAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C1B70C1805FD8600A9DD41 /* PopAnimator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		73A6A03A234F05C300861C7C /* NavigationTransitionController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NavigationTransitionController.entitlements; sourceTree = "<group>"; };
 		83C1B6D01805FB3100A9DD41 /* NavigationTransitionController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavigationTransitionController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C1B6D31805FB3100A9DD41 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83C1B6D51805FB3100A9DD41 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -57,8 +58,8 @@
 		83C1B6FE1805FB3100A9DD41 /* NavigationTransitionControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationTransitionControllerTests.m; sourceTree = "<group>"; };
 		83C1B7081805FB5A00A9DD41 /* NavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationControllerDelegate.h; sourceTree = "<group>"; };
 		83C1B7091805FB5A00A9DD41 /* NavigationControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationControllerDelegate.m; sourceTree = "<group>"; };
-		83C1B70B1805FD8600A9DD41 /* Animator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animator.h; sourceTree = "<group>"; };
-		83C1B70C1805FD8600A9DD41 /* Animator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animator.m; sourceTree = "<group>"; };
+		83C1B70B1805FD8600A9DD41 /* PopAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopAnimator.h; sourceTree = "<group>"; };
+		83C1B70C1805FD8600A9DD41 /* PopAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopAnimator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,13 +119,14 @@
 		83C1B6D91805FB3100A9DD41 /* NavigationTransitionController */ = {
 			isa = PBXGroup;
 			children = (
+				73A6A03A234F05C300861C7C /* NavigationTransitionController.entitlements */,
 				83C1B6E21805FB3100A9DD41 /* AppDelegate.h */,
 				83C1B6E31805FB3100A9DD41 /* AppDelegate.m */,
 				83C1B6E51805FB3100A9DD41 /* Main.storyboard */,
 				83C1B6E81805FB3100A9DD41 /* ViewController.h */,
 				83C1B6E91805FB3100A9DD41 /* ViewController.m */,
-				83C1B70B1805FD8600A9DD41 /* Animator.h */,
-				83C1B70C1805FD8600A9DD41 /* Animator.m */,
+				83C1B70B1805FD8600A9DD41 /* PopAnimator.h */,
+				83C1B70C1805FD8600A9DD41 /* PopAnimator.m */,
 				83C1B6EB1805FB3100A9DD41 /* Images.xcassets */,
 				83C1B6DA1805FB3100A9DD41 /* Supporting Files */,
 				83C1B7081805FB5A00A9DD41 /* NavigationControllerDelegate.h */,
@@ -209,6 +211,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Chris Eidhof";
 				TargetAttributes = {
+					83C1B6CF1805FB3100A9DD41 = {
+						DevelopmentTeam = Y28WQ9G7N2;
+					};
 					83C1B6F01805FB3100A9DD41 = {
 						TestTargetID = 83C1B6CF1805FB3100A9DD41;
 					};
@@ -219,6 +224,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -259,7 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83C1B70D1805FD8600A9DD41 /* Animator.m in Sources */,
+				83C1B70D1805FD8600A9DD41 /* PopAnimator.m in Sources */,
 				83C1B70A1805FB5A00A9DD41 /* NavigationControllerDelegate.m in Sources */,
 				83C1B6EA1805FB3100A9DD41 /* ViewController.m in Sources */,
 				83C1B6E41805FB3100A9DD41 /* AppDelegate.m in Sources */,
@@ -390,10 +396,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = NavigationTransitionController/NavigationTransitionController.entitlements;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
+				DEVELOPMENT_TEAM = Y28WQ9G7N2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NavigationTransitionController/NavigationTransitionController-Prefix.pch";
 				INFOPLIST_FILE = "NavigationTransitionController/NavigationTransitionController-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.chriseidhof.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -403,10 +415,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = NavigationTransitionController/NavigationTransitionController.entitlements;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
+				DEVELOPMENT_TEAM = Y28WQ9G7N2;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NavigationTransitionController/NavigationTransitionController-Prefix.pch";
 				INFOPLIST_FILE = "NavigationTransitionController/NavigationTransitionController-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.chriseidhof.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -472,6 +490,7 @@
 				83C1B7041805FB3100A9DD41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		83C1B7051805FB3100A9DD41 /* Build configuration list for PBXNativeTarget "NavigationTransitionControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +499,7 @@
 				83C1B7071805FB3100A9DD41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
